@@ -3,18 +3,42 @@
 <head>
   <title>City Weather</title>
   <link rel="icon" href="./assets/images/City_Weather _Icon.png" type="image/icon type">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <style src="./assets/style.css" ></style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 </head>
 
 <body>
-    <nav>
-
+    <nav class="container-fluid" style="height: 125px;">
+        <div class="row d-flex">
+            <figure class="flex-fill"><image rel="banner" src="./assets/images/City_Weather _Icon.png" style="height:125px"></image>
+            </figure>
+            <h1 id="appName" class="flex-fill display-1">City Weather</h1>
+        </div>
     </nav>
 
+    <div class="container-fluid">
+    <div class="row">
+        <aside class="col-s-12 col-md-3" style= "border: solid 5px black; height:200px;">
+            <form class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Enter your city</label>
+                    <input type="city" class="form-control" id="inputCity" placeholder="City">
+                </div>
+                <button type="submit" class="button btn-default">Search</button>
 
+            </form>
 
+        </aside>
 
+        <main class="col-s-12 col-md-9" style="border: solid 5px black; height:200px;">
+
+        </main>
+    </div>
+    </div>
 
 
     <script src="./assets/script/script.js"></script>
