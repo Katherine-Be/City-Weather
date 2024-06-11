@@ -1,3 +1,11 @@
 #appName {
-    font-size: 25rem;
+    color: var(--bs-blue);
+}
+
+.cityTab {
+    font-size: 20rem;
+}
+
+.card {
+    display:none;
 }
