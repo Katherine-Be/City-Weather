@@ -2,12 +2,14 @@
 <html>
 <head>
   <title>City Weather</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
   <link rel="icon" href="./assets/images/City_Weather _Icon.png" type="image/icon type">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link src="./assets/style.css" ></link>
+  <link href="./assets/css/reset.css" rel="stylesheet">
+  <link href="./assets/css/style.css" rel="stylesheet">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 </head>
 
@@ -24,25 +26,25 @@
         </div>
     </nav>
 
-    <div class="container-fluid" style="height: 75px"> 
-        <div class="row d-flex">
+    <div class="container-fluid fileTabs"> 
+        <div class="row d-flex  align-items-end">
             <div id="tabsSpacer" class="col-3 d-flex justify-content-center">
             </div>
             <div class="col-9 d-flex">
               <div class="col-2 d-flex justify-content-center">
-                <h2 id="cityName" class="cityTab">City Name</h2>
+                <h2 id="city0Name" class="cityTab d-none">City Name</h2>
               </div>
               <div class="col-2 d-flex justify-content-center">
-                <h2 id="cityName" class="cityTab">City Name</h2>
+                <h2 id="city1Name" class="cityTab d-none">City Name</h2>
               </div>
               <div class="col-2 d-flex justify-content-center">
-                <h2 id="cityName" class="cityTab">City Name</h2>
+                <h2 id="city2Name" class="cityTab d-none">City Name</h2>
               </div>
               <div class="col-2 d-flex justify-content-center">
-                <h2 id="cityName" class="cityTab">City Name</h2>
+                <h2 id="city3Name" class="cityTab d-none">City Name</h2>
               </div>
               <div class="col-2 d-flex justify-content-center">
-                <h2 id="cityName" class="cityTab">City Name</h2>
+                <h2 id="city4Name" class="cityTab d-none">City Name</h2>
               </div>
             </div>
         </div>
@@ -57,7 +59,7 @@
                     <label for="inputCity">Enter your city</label>
                     <input type="City" class="form-control" id="inputCity" placeholder="City">
                 </div>
-                <button type="submit" class="button btn-default" onclick="geocodeCity(event)">Search</button>
+                <button type="submit" class="button btn-default" onclick="searchCity(event)">Search</button>
 
             </form>
 
@@ -66,7 +68,7 @@
         <main class="col-s-12 col-md-9" style="border: solid 5px black; height:100%;">
             <div id="weatherCardContainer" class="container-fluid row">
             <div id="day1Card" class="card d-none">
-                <img src="./assets/images/City_Weather _Icon.png" id="day1WeatherIcon" style="width:100%">
+                <img src="./assets/images/City_Weather _Icon.png" id="day1WeatherIcon">
                 <div class="">
                   <h4 id="day1Date"><b>Date</b></h4>
                   <p id="day1Temps">High/Low</p>

@@ -1,0 +1,23 @@
+#appName {
+    color: rgba(246, 246, 18, 0.973);
+}
+
+.fileTabs * {
+    padding-bottom: 0;
+    margin-bottom: -1px;
+}
+
+.cityTab {
+    font-size: 2vw;
+    border: solid 3px black;
+    border-radius: 5% 5% 0 0;
+    padding-bottom:0;
+}
+
+@media screen and (max-width: 600px) {
+    .weatherIcon {
+        width: 200px;
+    }
+    
+}
+

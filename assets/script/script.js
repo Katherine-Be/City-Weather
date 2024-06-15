@@ -1,13 +1,70 @@
 
-function geocodeCity () {
-    console.log("fetchWeather function called");
+addEventListener('load', function() {
+    //  Retrieve the current list of cities from local storage
+    if (localStorage.getItem('recentCities') === null) {
+        localStorage.setItem('recentCities', JSON.stringify([]));
+    }
+
+    let recentCities = localStorage.getItem('recentCities');
+    recentCities = recentCities ? JSON.parse(recentCities) : [];
+    console.log(recentCities);
+
+   
+
+    for (let i = 0; i < recentCities.length && i < 5; i++) {
+        const cityTab = document.getElementById(`city${i}Name`);
+        if (cityTab) {
+            cityTab.classList.remove('d-none');
+            cityTab.innerHTML = recentCities[i];
+            // Attach click event listener to each city tab
+            cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
+        }
+    }
+});
+
+
+//  <-----search button----->
+function searchCity(event) {
 
     event.preventDefault();
 
     let inputCity = document.getElementById('inputCity').value;
     console.log("City:", inputCity);
 
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputCity}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
+    // Retrieve the current list of cities from local storage
+    var recentCities = localStorage.getItem('recentCities');
+    recentCities = recentCities ? JSON.parse(recentCities) : [];
+
+    //  Add the new city to the array
+    recentCities.push(inputCity);
+
+    //  Limit the array to 5 most recent cities
+    if (recentCities.length > 5) {
+        recentCities = recentCities.slice(-5);
+    }
+
+    //  Save the updated array back to local storage
+    localStorage.setItem('recentCities', JSON.stringify(recentCities));
+
+    for (let i = 0; i < recentCities.length && i < 5; i++) {
+        const cityTab = document.getElementById(`city${i}Name`);
+        if (cityTab) {
+            cityTab.classList.remove('d-none');
+            cityTab.innerHTML = recentCities[i];
+            // Attach click event listener to each city tab
+            cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
+        }
+    }
+
+    //  Call displayWeather for most recently added city
+    let city = recentCities[recentCities.length - 1];
+    displayWeather(city);
+};
+
+function displayWeather (cityName) {
+
+//  <-----fetch lattitude and longitude from API----->
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
         .then(response => {
                 return response.json();
         })                 
@@ -15,9 +72,10 @@ function geocodeCity () {
             console.log(data);
             let longitude = data[0].lon;
             let lattitude = data[0].lat;
-    
             console.log(longitude, lattitude)
 
+
+//  <-----fetch weather data from API----->
             fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lattitude}&lon=${longitude}&units=imperial&appid=9834887fab856f4130bf2552c9da5625`)
                 .then(response => response.json())      
                 .then(data => {
@@ -28,7 +86,7 @@ function geocodeCity () {
         let dayFour = data.list[24];
         let dayFive = data.list[32];
 
-        // Corrected: Initialize fiveDayForecast as an object instead of pushing into an array
+        //  useable fiveDayForecast object  //
         let fiveDayForecast = {
             firstDay: dayOne,
             secondDay: dayTwo,
@@ -38,20 +96,19 @@ function geocodeCity () {
         };
         console.log(fiveDayForecast);
 
-        var dayCard = document.getElementsByClassName("card");
 
-
+//  <-----display weather data----->
         Object.entries(fiveDayForecast).forEach(([day, weatherData], index) => {
-            // Constructing the day number (1 through 5)
+            //  Constructing the day number (1 through 5)
             let dayNumber = index + 1;
 
-            // Setting the weather icon
+            //  Weather icon
             let weatherIconElement = document.getElementById(`day${dayNumber}WeatherIcon`);
             weatherIconElement.src = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
 
-            // Setting the date      
+            //  Date      
             let timestamp = weatherData.dt;
-            let date = new Date(timestamp * 1000); // Convert to milliseconds
+            let date = new Date(timestamp * 1000);
             let numericDay = date.getDate();
             let monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             let month = monthList[date.getMonth()];
@@ -60,20 +117,22 @@ function geocodeCity () {
             let dateText = document.getElementById(`day${dayNumber}Date`);
             dateText.innerHTML = `${dayOfWeek}, ${month} ${numericDay}`;
 
-            // Setting the temperature
+            //  Temperature
             let temperatureText = document.getElementById(`day${dayNumber}Temps`);
             temperatureText.innerHTML = `Min: ${weatherData.main.temp_min}, Max: ${weatherData.main.temp_max}`;
             
-            // Setting the humidity
+            //  Humidity
             let humidityText = document.getElementById(`day${dayNumber}Humidity`);
             humidityText.innerHTML = `Humidity: ${weatherData.main.humidity}%`;
 
-            // Setting the wind speed
+            //  Wind speed
             let windSpeedText = document.getElementById(`day${dayNumber}Wind`);
             windSpeedText.innerHTML = `Wind: ${weatherData.wind.speed} mph`;    
         });
 
-        
+
+//  <-----show weather cards---->
+        var dayCard = document.getElementsByClassName("card");
         for (var i = 0; i < dayCard.length; i++) {
             dayCard[i].classList.remove("d-none");   
         };
@@ -81,16 +140,4 @@ function geocodeCity () {
     
    });
 
-}
-//         showNewWeather();
-//                     // .then(data => {
-//                 //     console.log(data);
-
-
-// function showNewWeather (fiveDayForecast) {
-//             console.log(fiveDayForecast)
- 
-//             }
-
-
-
+};
