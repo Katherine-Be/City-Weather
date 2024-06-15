@@ -1,5 +1,7 @@
-
-addEventListener('load', function() {
+//  <-----load recent city tabs----->
+document.addEventListener('load', updateTabs())
+    
+function updateTabs() {
     //  Retrieve the current list of cities from local storage
     if (localStorage.getItem('recentCities') === null) {
         localStorage.setItem('recentCities', JSON.stringify([]));
@@ -9,18 +11,18 @@ addEventListener('load', function() {
     recentCities = recentCities ? JSON.parse(recentCities) : [];
     console.log(recentCities);
 
-   
-
+    //  reveal tabs if used
     for (let i = 0; i < recentCities.length && i < 5; i++) {
         const cityTab = document.getElementById(`city${i}Name`);
         if (cityTab) {
             cityTab.classList.remove('d-none');
+            cityTab.innerHTML = '';
             cityTab.innerHTML = recentCities[i];
-            // Attach click event listener to each city tab
+            // Event listeners for the tabs
             cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
         }
     }
-});
+};
 
 
 //  <-----search button----->
@@ -35,33 +37,45 @@ function searchCity(event) {
     var recentCities = localStorage.getItem('recentCities');
     recentCities = recentCities ? JSON.parse(recentCities) : [];
 
+    //  Check if the city is already in the list
+    if (recentCities.includes(inputCity)) {
+        console.log('City already in list');
+        displayWeather(inputCity);
+        
+        return;
+    };
+
     //  Add the new city to the array
-    recentCities.push(inputCity);
+    recentCities.unshift(inputCity);
 
     //  Limit the array to 5 most recent cities
     if (recentCities.length > 5) {
-        recentCities = recentCities.slice(-5);
+        recentCities.pop();
     }
 
     //  Save the updated array back to local storage
     localStorage.setItem('recentCities', JSON.stringify(recentCities));
 
+    //  Add new city to tab
     for (let i = 0; i < recentCities.length && i < 5; i++) {
         const cityTab = document.getElementById(`city${i}Name`);
         if (cityTab) {
             cityTab.classList.remove('d-none');
             cityTab.innerHTML = recentCities[i];
-            // Attach click event listener to each city tab
-            cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
         }
     }
 
     //  Call displayWeather for most recently added city
-    let city = recentCities[recentCities.length - 1];
-    displayWeather(city);
+    displayWeather(inputCity);
+    updateTabs();
 };
 
+// function displayTabWeather(cityName) {
+//     cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
+// };
+
 function displayWeather (cityName) {
+    console.log("City:", cityName);
 
 //  <-----fetch lattitude and longitude from API----->
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
