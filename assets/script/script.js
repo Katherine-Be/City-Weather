@@ -11,7 +11,7 @@ function updateTabs() {
     recentCities = recentCities ? JSON.parse(recentCities) : [];
     console.log(recentCities);
 
-    //  reveal tabs if used
+    //  Reveal tabs if used
     for (let i = 0; i < recentCities.length && i < 5; i++) {
         const cityTab = document.getElementById(`city${i}Name`);
         if (cityTab) {
@@ -26,7 +26,7 @@ function updateTabs() {
 };
 
 
-//  <-----search button----->
+//  <-----Search button----->
 function searchCity(event) {
 
     event.preventDefault();
@@ -66,19 +66,16 @@ function searchCity(event) {
         }
     }
 
-    //  Call displayWeather for most recently added city
+    //  All displayWeather for most recently added city
     displayWeather(inputCity);
     updateTabs();
 };
 
-// function displayTabWeather(cityName) {
-//     cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
-// };
-
+//  <-----Fetch data and show weather----->
 function displayWeather (cityName) {
     console.log("City:", cityName);
 
-//  <-----fetch lattitude and longitude from API----->
+    //  Fetch lattitude and longitude from geocode API
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
         .then(response => {
                 return response.json();
@@ -90,31 +87,31 @@ function displayWeather (cityName) {
             console.log(longitude, lattitude)
 
 
-//  <-----fetch weather data from API----->
+            //  Fetch weather data from 5 day weather API----->
             fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lattitude}&lon=${longitude}&units=imperial&appid=9834887fab856f4130bf2552c9da5625`)
                 .then(response => response.json())      
                 .then(data => {
-        console.log(data);
-        let dayOne = data.list[0];
-        let dayTwo = data.list[8];
-        let dayThree = data.list[16];
-        let dayFour = data.list[24];
-        let dayFive = data.list[32];
+            console.log(data);
+            let dayOne = data.list[0];
+            let dayTwo = data.list[8];
+            let dayThree = data.list[16];
+            let dayFour = data.list[24];
+            let dayFive = data.list[32];
 
-        //  useable fiveDayForecast object  //
-        let fiveDayForecast = {
-            firstDay: dayOne,
-            secondDay: dayTwo,
-            thirdDay: dayThree,
-            fourthDay: dayFour,
-            fifthDay: dayFive
-        };
-        console.log(fiveDayForecast);
+            //  Useable fiveDayForecast object  //
+            let fiveDayForecast = {
+                firstDay: dayOne,
+                secondDay: dayTwo,
+                thirdDay: dayThree,
+                fourthDay: dayFour,
+                fifthDay: dayFive
+             };
+
+            console.log(fiveDayForecast);
 
 
-//  <-----display weather data----->
+        //  Display weather data
         Object.entries(fiveDayForecast).forEach(([day, weatherData], index) => {
-            //  Constructing the day number (1 through 5)
             let dayNumber = index + 1;
 
             //  Weather icon
@@ -146,7 +143,7 @@ function displayWeather (cityName) {
         });
 
 
-//  <-----show weather cards---->
+        //  Reveal weather cards
         var dayCard = document.getElementsByClassName("card");
         for (var i = 0; i < dayCard.length; i++) {
             dayCard[i].classList.remove("d-none");   
