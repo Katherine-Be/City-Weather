@@ -18,6 +18,7 @@ function updateTabs() {
             cityTab.classList.remove('d-none');
             cityTab.innerHTML = '';
             cityTab.innerHTML = recentCities[i];
+            cityTab.style.textTransform = "capitalize"
             // Event listeners for the tabs
             cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
         }
