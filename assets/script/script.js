@@ -62,13 +62,15 @@ function searchCity(event) {
         const cityTab = document.getElementById(`city${i}Name`);
         if (cityTab) {
             cityTab.classList.remove('d-none');
+            cityTab.innerHTML = '';
             cityTab.innerHTML = recentCities[i];
         }
     }
 
     //  All displayWeather for most recently added city
-    displayWeather(inputCity);
     updateTabs();
+    displayWeather(inputCity);
+
 };
 
 //  <-----Fetch data and show weather----->
