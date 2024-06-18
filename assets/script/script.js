@@ -1,3 +1,5 @@
+const tabParent = document.getElementById('tabParent');
+
 //  <-----load recent city tabs----->
 document.addEventListener('load', updateTabs())
     
@@ -12,16 +14,20 @@ function updateTabs() {
     console.log(recentCities);
 
     //  Reveal tabs if used
+    tabParent.innerHTML = '';
     for (let i = 0; i < recentCities.length && i < 5; i++) {
-        const cityTab = document.getElementById(`city${i}Name`);
-        if (cityTab) {
-            cityTab.classList.remove('d-none');
-            cityTab.innerHTML = '';
-            cityTab.innerHTML = recentCities[i];
-            cityTab.style.textTransform = "capitalize"
-            // Event listeners for the tabs
-            cityTab.addEventListener('click', () => displayWeather(recentCities[i]));
-        }
+        const cityTab = document.createElement('div');
+        cityTab.classList.add('col-2', 'd-flex', 'justify-content-center');
+        const cityTabName = document.createElement('h2');
+        cityTabName.classList.add('cityTab');
+        cityTabName.id = `city${i}Name`;
+        cityTabName.textContent = recentCities[i];
+        cityTab.append(cityTabName);
+        cityTab.addEventListener('click', (event) => {
+            var index = event.target.id[4]; //extracts character in index position 4 of the id
+            displayWeather(recentCities[index]);
+        });
+        tabParent.append(cityTab);
     }
 };
 
@@ -57,14 +63,25 @@ function searchCity(event) {
     //  Save the updated array back to local storage
     localStorage.setItem('recentCities', JSON.stringify(recentCities));
 
+//     <div class="col-2 d-flex justify-content-center">
+//     <h2 id="city0Name" class="cityTab d-none">City Name</h2>
+//   </div>
+
     //  Add new city to tab
+    tabParent.innerHTML = '';
     for (let i = 0; i < recentCities.length && i < 5; i++) {
-        const cityTab = document.getElementById(`city${i}Name`);
-        if (cityTab) {
-            cityTab.classList.remove('d-none');
-            cityTab.innerHTML = '';
-            cityTab.innerHTML = recentCities[i];
-        }
+        const cityTab = document.createElement('div');
+        cityTab.classList.add('col-2', 'd-flex', 'justify-content-center');
+        const cityTabName = document.createElement('h2');
+        cityTabName.classList.add('cityTab');
+        cityTabName.id = `city${i}Name`;
+        cityTabName.textContent = recentCities[i];
+        cityTab.append(cityTabName);
+        cityTab.addEventListener('click', (event) => {
+            var index = event.target.id[4]; //extracts character in index position 4 of the id
+            displayWeather(recentCities[index]);
+        });
+        tabParent.append(cityTab);
     }
 
     //  All displayWeather for most recently added city
