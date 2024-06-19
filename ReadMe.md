@@ -20,20 +20,8 @@ Go to https://katherine-be.github.io/City-Weather/
 ## Use
 Search for a city and the weather will populate in a new city tab. If you wish to view a previous city's weather, click on that tab.
 
-## Testing
 
-
-## Credits
-
-
-
-## Contributing
-
-
-## License
-
-
-![alt text](./assets/images/City_Weather_Demo.mp4)
+![alt text](./assets/images/City_Weather_Demo_2.mp4)
 
 ![ alt text ](https://img.shields.io/badge/Creator-KAT-pink)
 
