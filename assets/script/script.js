@@ -22,10 +22,12 @@ function updateTabs() {
         cityTabName.classList.add('cityTab');
         cityTabName.id = `city${i}Name`;
         cityTabName.textContent = recentCities[i];
+        cityTabName.style.textTransform = "capitalize";
         cityTab.append(cityTabName);
         cityTab.addEventListener('click', (event) => {
             var index = event.target.id[4]; //extracts character in index position 4 of the id
             displayWeather(recentCities[index]);
+            highlightTab(index);
         });
         tabParent.append(cityTab);
     }
@@ -48,7 +50,6 @@ function searchCity(event) {
     if (recentCities.includes(inputCity)) {
         console.log('City already in list');
         displayWeather(inputCity);
-        
         return;
     };
 
@@ -76,6 +77,7 @@ function searchCity(event) {
         cityTabName.classList.add('cityTab');
         cityTabName.id = `city${i}Name`;
         cityTabName.textContent = recentCities[i];
+        cityTabName.style.textTransform = "capitalize";
         cityTab.append(cityTabName);
         cityTab.addEventListener('click', (event) => {
             var index = event.target.id[4]; //extracts character in index position 4 of the id
@@ -89,6 +91,18 @@ function searchCity(event) {
     displayWeather(inputCity);
 
 };
+
+
+//  <-----Highlight current tab----->
+highlightTab = (index) => {
+    let cityTabs = document.getElementsByClassName('cityTab');
+    for (let i = 0; i < cityTabs.length; i++) {
+        cityTabs[i].classList.remove('selected');
+    }
+    cityTabs[index].classList.add('selected');
+};
+
+
 
 //  <-----Fetch data and show weather----->
 function displayWeather (cityName) {
