@@ -1,0 +1,12 @@
+{
+  "name": "city-weather",
+  "version": "1.0.0",
+  "description": "This is a weather-window simulator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "git repository": "https://github.com/Katherine-Be/City-Weather",
+  "author": "Katherine Alex Bensley",
+  "license": "ISC"
+}
