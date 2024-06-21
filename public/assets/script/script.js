@@ -109,7 +109,7 @@ function displayWeather (cityName) {
     console.log("City:", cityName);
 
     //  Fetch lattitude and longitude from geocode API
-    fetch(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
         .then(response => {
                 return response.json();
         })                 
@@ -121,7 +121,7 @@ function displayWeather (cityName) {
 
 
             //  Fetch weather data from 5 day weather API----->
-            fetch(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?lat=${lattitude}&lon=${longitude}&units=imperial&appid=9834887fab856f4130bf2552c9da5625`)
+            fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lattitude}&lon=${longitude}&units=imperial&appid=9834887fab856f4130bf2552c9da5625`)
                 .then(response => response.json())      
                 .then(data => {
             console.log(data);
@@ -149,7 +149,7 @@ function displayWeather (cityName) {
 
             //  Weather icon
             let weatherIconElement = document.getElementById(`day${dayNumber}WeatherIcon`);
-            weatherIconElement.src = `https://cors-anywhere.herokuapp.com/http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+            weatherIconElement.src = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
 
             //  Date      
             let timestamp = weatherData.dt;

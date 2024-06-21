@@ -4,12 +4,15 @@
   "description": "This is a weather-window simulator.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "devStart": "nodemon -e * server.js"
+    },
   "git repository": "https://github.com/Katherine-Be/City-Weather",
   "author": "Katherine Alex Bensley",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }
