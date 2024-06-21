@@ -8,5 +8,8 @@
   },
   "git repository": "https://github.com/Katherine-Be/City-Weather",
   "author": "Katherine Alex Bensley",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
