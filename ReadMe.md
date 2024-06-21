@@ -8,10 +8,7 @@ This is an application designed to display weather in a specified city.
 - [Description](#description)
 - [Installation](#installation)
 - [Use](#use)    
-- [Credits](#credits)
-- [Contributing](#contributing)
-- [License](#license)
-- [Testing](#testing)
+- [Questions](#questions)
 
     
 ## Installation
