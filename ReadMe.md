@@ -8,10 +8,7 @@ This is an application designed to display weather in a specified city.
 - [Description](#description)
 - [Installation](#installation)
 - [Use](#use)    
-- [Credits](#credits)
-- [Contributing](#contributing)
-- [License](#license)
-- [Testing](#testing)
+- [Questions](#questions)
 
     
 ## Installation
@@ -23,7 +20,7 @@ Search for a city and the weather will populate in a new city tab. If you wish t
 ##  Credits
 ![alt text](./assets/images/powered-by-openai-badge-filled-on-dark.svg)
 
-![alt text](./assets/images/City_Weather_Demo_2.mp4)
+![alt text](./assets/images/City_Weather_Demo.gif)
 
 ![ alt text ](https://img.shields.io/badge/Creator-KAT-pink)
 
