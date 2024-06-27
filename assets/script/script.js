@@ -109,7 +109,7 @@ function displayWeather (cityName) {
     console.log("City:", cityName);
 
     //  Fetch lattitude and longitude from geocode API
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=9834887fab856f4130bf2552c9da5625`)
         .then(response => {
                 return response.json();
         })                 
@@ -149,7 +149,7 @@ function displayWeather (cityName) {
 
             //  Weather icon
             let weatherIconElement = document.getElementById(`day${dayNumber}WeatherIcon`);
-            weatherIconElement.src = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+            weatherIconElement.src = `https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
 
             //  Date      
             let timestamp = weatherData.dt;
